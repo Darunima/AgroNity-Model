@@ -569,7 +569,7 @@ fileImg.addEventListener('change', async (event) => {
 
     try {
         pushMsg('bot', "Analyzing image...");
-        const response = await fetch('/analyze_image', {
+        const response = await fetch('https://agronity-model.onrender.com/analyze_image', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ filename: file.name })
@@ -613,7 +613,7 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
     pushMsg("bot", "Analyzing your request...");
 
     try {
-        const response = await fetch("/analyze", {
+        const response = await fetch("https://agronity-model.onrender.com/analyze", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ crop, district, area, soil })

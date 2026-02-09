@@ -104,8 +104,8 @@ def load_models():
     # Load existing joblib models (sklearn)
     try:
         models["sklearn"]["preprocessor"] = joblib.load(os.path.join(MODEL_DIR, "preprocessor.joblib"))
-        models["sklearn"]["clf"] = joblib.load(os.path.join(MODEL_DIR, "feasibility_clf.joblib"))
-        models["sklearn"]["reg"] = joblib.load(os.path.join(MODEL_DIR, "yield_reg.joblib"))
+        models["sklearn"]["clf"] = joblib.load(os.path.join(MODEL_DIR, "feasibility_CLF.joblib"))
+        models["sklearn"]["reg"] = joblib.load(os.path.join(MODEL_DIR, "yield_REG.joblib"))
         print("✓ Sklearn models loaded successfully")
     except FileNotFoundError:
         print("⚠ Sklearn model files not found")

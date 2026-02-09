@@ -30,7 +30,7 @@ agri_ml_data_df = ag.load_agri_ml_regional_data()  # Load regional data for agri
 @app.route('/')
 def root():
     # serve the HTML page
-    return send_from_directory('.', 'sih.html')
+    return send_from_directory('.', 'index.html')
 
 @app.route('/analyze', methods=['POST'])
 def analyze():

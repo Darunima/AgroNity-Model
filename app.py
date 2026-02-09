@@ -93,9 +93,24 @@ def get_available_models():
 
 
 if __name__ == '__main__':
-    print("Starting AgroNity backend on http://127.0.0.1:5000")
+    # Use PORT env var (Render, Heroku, etc.) or default to 5000 for local runs
+    port = int(os.environ.get('PORT', 5000))
+    debug_mode = os.environ.get('FLASK_DEBUG', '0') in ('1', 'true', 'True')
+    print(f"Starting AgroNity backend on 0.0.0.0:{port} (debug={debug_mode})")
     print("Available models information:")
     print(f"  - Sklearn models: {models['sklearn']['preprocessor'] is not None}")
     print(f"  - Agri ML model: {models['agri_ml'] is not None}")
     print(f"  - Keras CNN model: {models['keras_cnn'] is not None}")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=debug_mode, host='0.0.0.0', port=port)
+
+# Healthcheck endpoint for platform probes and debugging
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({
+        "status": "ok",
+        "models_loaded": {
+            "sklearn": models['sklearn']['preprocessor'] is not None,
+            "agri_ml": models['agri_ml'] is not None,
+            "keras_cnn": models['keras_cnn'] is not None
+        }
+    })
